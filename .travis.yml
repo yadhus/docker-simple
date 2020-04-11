@@ -17,5 +17,6 @@ script:
 
 deploy:
   provider: heroku
-  api_key: $HEROKU_PASSWORD
+  api_key:
+    secure: $HEROKU_PASSWORD
   app: rocky-bayou-95129
