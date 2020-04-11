@@ -4,15 +4,18 @@ os: linux
 services:
   - docker
 
-before_install:
-  - docker build -t yadhus/docker-simple -f Dockerfile.dev .
+# before_install:
+#   - docker build -t yadhus/docker-simple -f Dockerfile.dev .
+
+# script:
+#   - docker run -e CI=true yadhus/docker-simple npm run test
+
+before_deploy:
+  - docker login --username=$HEROKU_EMAIL --password=$HEROKU_PASSWORD registry.heroku.com
 
 script:
-  - docker run -e CI=true yadhus/docker-simple npm run test
+  - docker build registry.heroku.com/rocky-bayou-95129/web
 
 deploy:
   provider: script
-  script: >-
-    docker login --username=$HEROKU_EMAIL --password=$HEROKU_PASSWORD registry.heroku.com
-    docker build registry.heroku.com/rocky-bayou-95129/web
-    docker push registry.heroku.com/rocky-bayou-95129/web
+  script: docker push registry.heroku.com/rocky-bayou-95129/web
