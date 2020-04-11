@@ -12,6 +12,7 @@ script:
 
 deploy:
   provider: script
-  script: docker login -u $HEROKU_EMAIL -p $HEROKU_PASSWORD registry.heroku.com
+  script: >-
+    docker login --username=$HEROKU_EMAIL --password=$HEROKU_PASSWORD registry.heroku.com
     docker build registry.heroku.com/rocky-bayou-95129/web
     docker push registry.heroku.com/rocky-bayou-95129/web
