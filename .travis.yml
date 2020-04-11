@@ -12,8 +12,7 @@ script:
 
 deploy:
   provider: heroku
-  api_key:
-    secure: 5b039a59-9314-41a5-bcc4-dc668dac8e0e
+  api_key: $heroku-api-key
   app: rocky-bayou-95129
   on:
     branch: master
