@@ -11,8 +11,7 @@ script:
   - docker run -e CI=true yadhus/docker-simple npm run test
 
 deploy:
-  provider: heroku
-  api_key: $heroku-api-key
-  app: rocky-bayou-95129
-  on:
-    branch: master
+  provider: script
+  script: docker login -u $HEROKU_EMAIL -p $HEROKU_PASSWORD registry.heroku.com
+    docker build -t registry.heroku.com/rocky-bayou-95129/web
+    docker push registry.heroku.com/rocky-bayou-95129/web
