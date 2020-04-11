@@ -1,4 +1,6 @@
 language: generic
+dist: xenial
+os: linux
 services:
   - docker
 
@@ -7,3 +9,11 @@ before_install:
 
 script:
   - docker run -e CI=true yadhus/docker-simple npm run test
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: 5b039a59-9314-41a5-bcc4-dc668dac8e0e
+  app: rocky-bayou-95129
+  on:
+    branch: master
