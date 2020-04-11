@@ -10,12 +10,12 @@ services:
 # script:
 #   - docker run -e CI=true yadhus/docker-simple npm run test
 
-before_deploy:
-  - docker login --username=$HEROKU_EMAIL --password=$HEROKU_PASSWORD registry.heroku.com
-
 script:
+  - docker login --username=$HEROKU_EMAIL --password=$HEROKU_PASSWORD registry.heroku.com
   - docker build -t registry.heroku.com/rocky-bayou-95129/web .
+  - docker push registry.heroku.com/rocky-bayou-95129/web
 
 deploy:
-  provider: script
-  script: docker push registry.heroku.com/rocky-bayou-95129/web
+  provider: heroku
+  api_key: $HEROKU_PASSWORD
+  app: rocky-bayou-95129
