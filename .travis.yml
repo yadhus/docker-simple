@@ -20,6 +20,7 @@ script:
 deploy:
   provider: heroku
   api_key: $HEROKU_PASSWORD
+  app: rocky-bayou-95129
   run:
     - "heroku container:release web -a rocky-bayou-95129"
   on:
