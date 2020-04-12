@@ -18,7 +18,8 @@ script:
   - docker push registry.heroku.com/rocky-bayou-95129/web
 
 deploy:
-  provider: script
-  script: heroku container:release web --app rocky-bayou-95129
+  provider: heroku
+  api_key: $HEROKU_PASSWORD
+  app: rocky-bayou-95129
   on:
     branch: master
