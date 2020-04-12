@@ -19,6 +19,6 @@ script:
 
 deploy:
   provider: script
-  script: docker run --rm -e HEROKU_API_KEY=$HEROKU_PASSWORD yadhus/docker-simple container:release web --app rocky-bayou-95129
+  script: ./release.sh
   on:
     branch: master
