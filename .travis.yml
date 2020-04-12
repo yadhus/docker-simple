@@ -19,6 +19,6 @@ script:
 
 deploy:
   provider: script
-  script: ./release.sh
+  script: release.sh
   on:
     branch: master
