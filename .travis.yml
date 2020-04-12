@@ -13,12 +13,12 @@ before_install:
 #   - docker run -e CI=true yadhus/docker-simple npm run test
 
 script:
-  - docker build -t registry.heroku.com/rocky-bayou-95129/web .
-  # - docker tag yadhus/docker-simple registry.heroku.com/rocky-bayou-95129/web
+  - docker build -t yadhus/docker-simple .
+  - docker tag yadhus/docker-simple registry.heroku.com/rocky-bayou-95129/web
   - docker push registry.heroku.com/rocky-bayou-95129/web
 
 deploy:
   provider: script
-  script: docker run --rm -e HEROKU_API_KEY=$HEROKU_PASSWORD registry.heroku.com/rocky-bayou-95129 container:release web --app rocky-bayou-95129
+  script: docker run --rm -e HEROKU_API_KEY=$HEROKU_PASSWORD registry.heroku.com/rocky-bayou-95129/web container:release web --app rocky-bayou-95129
   on:
     branch: master
