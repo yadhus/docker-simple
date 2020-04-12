@@ -6,9 +6,8 @@ services:
 
 before_install:
   #   - docker build -t yadhus/docker-simple -f Dockerfile.dev .
-  - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-  - docker login --username=$HEROKU_EMAIL --password=$HEROKU_PASSWORD registry.heroku.com
-  - heroku login
+  - curl https://cli-assets.heroku.com/install.sh | sh
+  - docker login --username=_ --password=$HEROKU_PASSWORD registry.heroku.com
 
 # script:
 #   - docker run -e CI=true yadhus/docker-simple npm run test
@@ -20,6 +19,6 @@ script:
 
 deploy:
   provider: script
-  script: heroku container:release web --app rocky-bayou-95129
+  script: docker run --rm -e HEROKU_API_KEY=$HEROKU_PASSWORD yadhus/docker-simple container:release web --app rocky-bayou-95129
   on:
     branch: master
