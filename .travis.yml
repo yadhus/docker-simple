@@ -20,6 +20,6 @@ deploy:
   provider: script
   script: >-
     docker push registry.heroku.com/rocky-bayou-95129/web
-    heroku container:release web -a rocky-bayou-95129
+    heroku container:release web -app rocky-bayou-95129
   on:
     branch: master
