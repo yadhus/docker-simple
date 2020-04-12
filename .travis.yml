@@ -15,11 +15,10 @@ before_install:
 script:
   - docker build -t yadhus/docker-simple .
   - docker tag yadhus/docker-simple registry.heroku.com/rocky-bayou-95129/web
-  - docker push registry.heroku.com/rocky-bayou-95129/web
+    - docker push registry.heroku.com/rocky-bayou-95129/web
 
 deploy:
-  provider: heroku
-  api_key: $HEROKU_PASSWORD
-  app: rocky-bayou-95129
+  provider: script
+  script: ./release.sh
   on:
     branch: master
