@@ -4,18 +4,22 @@ os: linux
 services:
   - docker
 
-# before_install:
-#   - docker build -t yadhus/docker-simple -f Dockerfile.dev .
+before_install:
+  #   - docker build -t yadhus/docker-simple -f Dockerfile.dev .
+  - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 
 # script:
 #   - docker run -e CI=true yadhus/docker-simple npm run test
 
-# script:
-#   - docker login --username=$HEROKU_EMAIL --password=$HEROKU_PASSWORD registry.heroku.com
-#   - docker build -t registry.heroku.com/rocky-bayou-95129/web .
-#   - docker push registry.heroku.com/rocky-bayou-95129/web
+script:
+  - docker build -t yadhus/docker-simple .
+  - docker tag yadhus/docker-simple registry.heroku.com/rocky-bayou-95129/web
 
 deploy:
-  provider: heroku
-  api_key: $HEROKU_PASSWORD
-  app: rocky-bayou-95129
+  provider: script
+  script: >-
+    docker push registry.heroku.com/rocky-bayou-95129/web
+    heroku container:release web -a rocky-bayou-95129
+  on:
+    branch: master
