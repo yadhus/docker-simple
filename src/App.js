@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello world! CI Travis to heroku works!</p>
+        <p>Hello world! Automatic deployment using travis to heroku</p>
         <a
           className="App-link"
           href="https://reactjs.org"
